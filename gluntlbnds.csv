@@ -1,0 +1,232 @@
+value,count,iso3v10,unsdcode,countryeng
+2,160313.0,ARG,32,Argentina
+3,52361.0,BOL,68,Bolivia
+4,410349.0,BRA,76,Brazil
+5,49686.0,CHL,152,Chile
+6,53814.0,COL,170,Colombia
+7,12340.0,ECU,218,Ecuador
+8,1436.0,FLK,238,Falkland Islands
+9,3954.0,GUF,254,French Guiana
+10,9976.0,GUY,328,Guyana
+11,61537.0,PER,604,Peru
+12,20251.0,PRY,600,Paraguay
+13,6868.0,SUR,740,Suriname
+14,9921.0,URY,858,Uruguay
+15,43617.0,VEN,862,Venezuela
+22,33.0,ASM,16,American Samoa
+23,405807.0,AUS,36,Australia
+24,106.0,COK,184,Cook Islands
+25,1446.0,FJI,242,Fiji
+26,125.0,FSM,583,Federated State of Micronesia
+27,48.0,GUM,316,Guam
+28,343.0,KIR,296,Kiribati
+29,435.0,MHL,584,Marshall Islands
+30,78.0,MNP,580,Northern Mariana Islands
+31,1227.0,NCL,540,New Caledonia
+32,8.0,NFK,574,Norfolk Island
+33,26.0,NIU,570,Niue
+34,4.0,NRU,520,Nauru
+35,17999.0,NZL,554,New Zealand
+36,8.0,PCN,612,Pitcairn
+37,69.0,PLW,585,Palau
+38,23805.0,PNG,598,Papua New Guinea
+39,914.0,PYF,258,French Polynesia
+40,2151.0,SLB,90,Solomon Islands
+41,23.0,TKL,772,Tokelau
+42,171.0,TON,776,Tonga
+43,28.0,TUV,798,Tuvalu
+44,966.0,VUT,548,Vanuatu
+45,22.0,WLF,876,Wallis and Futuna
+46,195.0,WSM,882,Western Samoa
+52,21.0,ABW,533,Aruba
+53,19.0,AIA,660,Anguilla
+54,82.0,ANT,530,Netherland Antilles
+55,46.0,ATG,28,Antigua and Barbuda
+56,1448.0,BHS,44,Bahamas
+57,1234.0,BLZ,84,Belize
+58,18.0,BMU,60,Bermuda
+59,34.0,BRB,52,Barbados
+60,992163.0,CAN,124,Canada
+61,2619.0,CRI,188,Costa Rica
+62,6615.0,CUB,192,Cuba
+63,41.0,CYM,136,Cayman Islands
+64,56.0,DMA,212,Commonwealth of Dominica
+65,2558.0,DOM,214,Dominican Republic
+66,151.0,GLP,312,Guadeloupe
+67,34.0,GRD,308,Grenada
+68,106799.0,GRL,304,Greenland
+69,5338.0,GTM,320,Guatemala
+70,5621.0,HND,340,Honduras
+71,1546.0,HTI,332,Haiti
+72,635.0,JAM,388,Jamaica
+73,28.0,KNA,659,Saint Kitts and Nevis
+74,43.0,LCA,662,Saint Lucia
+75,102033.0,MEX,484,Mexico
+76,11.0,MSR,500,Montserrat
+77,85.0,MTQ,474,Martinique
+78,6056.0,NIC,558,Nicaragua
+79,4083.0,PAN,591,Panama
+80,532.0,PRI,630,Puerto Rico
+81,1045.0,SLV,222,El Salvador
+82,39.0,SPM,666,Saint Pierre and Miquelon
+83,122.0,TCA,796,Turks and Caicos Islands
+84,327.0,TTO,780,Trinidad and Tobago
+85,644053.0,USA,840,United States of America
+86,62.0,VCT,670,Saint Vincent
+87,44.0,VGB,92,British Virgin Islands
+88,51.0,VIR,850,United States Virgin Islands
+102,1835.0,ALB,8,Albania
+103,30.0,AND,20,Andorra
+104,5782.0,AUT,40,Austria
+105,2252.0,BEL,56,Belgium
+106,7104.0,BGR,100,Bulgaria
+107,3328.0,BIH,70,Bosnia-Herzegovina
+108,16243.0,BLR,112,Belarus
+109,2760.0,CHE,756,Switzerland
+110,5660.0,CZE,203,Czech Republic
+111,26878.0,DEU,276,Germany
+112,4392.0,DNK,208,Denmark
+113,31693.0,ESP,724,Spain
+114,4324.0,EST,233,Estonia
+115,37204.0,FIN,246,Finland
+116,37895.0,FRA,250,France
+117,273.0,FRO,234,Faeroe Islands
+118,21618.0,GBR,826,United Kingdom
+119,30.0,GGY,1001,Guernsey
+120,2.0,GIB,292,Gibraltar
+121,9721.0,GRC,300,Greece
+122,4212.0,HRV,191,Croatia
+123,6343.0,HUN,348,Hungary
+124,5997.0,IRL,372,Ireland
+125,20102.0,ITA,380,Italy
+126,19.0,JEY,1005,Jersey
+127,13.0,LIE,438,Liechtenstein
+128,5346.0,LTU,440,Lithuania
+129,189.0,LUX,442,Luxembourg
+130,5562.0,LVA,428,Latvia
+131,2.0,MCO,492,Monaco
+132,2326.0,MDA,498,Republic of Moldova
+133,1555.0,MKD,807,Macedonia
+134,37.0,MLT,470,Malta
+135,2921.0,NLD,528,Netherlands
+136,39245.0,NOR,578,Norway
+137,23747.0,POL,616,Poland
+138,5832.0,PRT,620,Portugal
+139,15926.0,ROU,642,Romania
+140,1698649.0,RUS,643,Russia
+141,6590.0,SCG,891,Serbia and Montenegro
+142,16819.0,SJM,1015,Svalbard
+143,3.0,SMR,674,San Marino
+144,3446.0,SVK,703,Slovakia
+145,1373.0,SVN,705,Slovenia
+146,46487.0,SWE,752,Sweden
+147,42767.0,UKR,804,Ukraine
+148,11414.0,ISL,352,Iceland
+149,68.0,IMN,1003,Isle of Man
+152,35951.0,AFG,4,Afghanistan
+153,4210.0,ARE,784,United Arab Emirates
+154,1762.0,ARM,51,Armenia
+155,5381.0,AZE,31,Azerbaijan
+156,7387.0,BGD,50,Bangladesh
+157,59.0,BHR,48,Bahrain
+158,294.0,BRN,96,Brunei Darussalam
+159,2065.0,BTN,64,Bhutan
+160,545202.0,CHN,156,China
+161,630.0,CYP,196,Cyprus
+162,4433.0,GEO,268,Georgia
+163,102.0,HKG,344,Hong Kong
+164,98245.0,IDN,360,Indonesia
+165,167173.0,IND,356,India
+166,89573.0,IRN,364,Iran
+167,24088.0,IRQ,368,Iraq
+168,1213.0,ISR,376,Israel
+169,4883.0,JOR,400,Jordan
+170,186604.0,KAZ,1007,Kazakhstan
+171,12017.0,KGZ,417,Kyrgyz Republic
+172,8729.0,KHM,116,Cambodia
+173,6601.0,KOR,410,Korea
+174,986.0,KWT,414,Kuwait
+175,11325.0,LAO,418,Lao People's Democratic Republic
+176,609.0,LBN,422,Lebanon
+177,4.0,MAC,446,Macao
+178,264.0,MDV,462,Maldives
+179,34593.0,MMR,104,Myanmar
+180,105914.0,MNG,496,Mongolia
+181,16300.0,MYS,458,Malaysia
+182,7712.0,NPL,524,Nepal
+183,15883.0,OMN,512,Oman
+184,42662.0,PAK,586,Pakistan
+185,17372.0,PHL,608,Philippines
+186,7802.0,PRK,408,"Korea, Dem. People's Rep. of"
+187,340.0,PSE,1011,Occupied Palestinian Territory
+188,665.0,QAT,634,Qatar
+189,100797.0,SAU,682,Saudi Arabia
+190,45.0,SGP,702,Singapore
+191,10623.0,SYR,760,Syrian Arab Republic
+192,25568.0,THA,764,Thailand
+193,8390.0,TJK,762,Tajikistan
+194,28242.0,TKM,795,Turkmenistan
+195,806.0,TLS,626,East Timor
+196,47419.0,TUR,792,Turkey
+197,26214.0,UZB,860,Uzbekistan
+198,16692.0,VNM,704,Viet Nam
+199,20584.0,YEM,887,Yemen
+200,24709.0,JPN,392,Japan
+201,3374.0,LKA,144,Sri Lanka
+202,2039.0,TWN,1013,Taiwan
+302,60020.0,AGO,24,Angola
+303,1198.0,BDI,108,Burundi
+304,5492.0,BEN,204,Benin
+305,13154.0,BFA,854,Burkina Faso
+306,28574.0,BWA,72,Botswana
+307,29221.0,CAF,140,Central African Republic
+308,15244.0,CIV,384,Ivory Coast
+309,21924.0,CMR,120,Cameroon
+310,108514.0,COD,180,"Congo, Democratic Republic"
+311,16029.0,COG,178,Congo
+312,1079.0,DJI,262,Djibouti
+313,122924.0,DZA,12,Algeria
+314,51758.0,EGY,818,Egypt
+315,6174.0,ERI,232,Eritrea
+316,53231.0,ETH,231,Ethiopia
+317,12532.0,GAB,266,Gabon
+318,11288.0,GHA,288,Ghana
+319,11724.0,GIN,324,Guinea
+320,555.0,GMB,270,Gambia
+321,1838.0,GNB,624,Guinea-Bissau
+322,1320.0,GNQ,226,Equatorial Guinea
+323,27386.0,KEN,404,Kenya
+324,4603.0,LBR,430,Liberia
+325,85032.0,LBY,434,Libyan Arab Jamahiriya
+326,1640.0,LSO,426,Lesotho
+327,36456.0,MAR,504,Morocco (includes Western Sahara)
+328,61319.0,MLI,466,Mali
+329,38736.0,MOZ,508,Mozambique
+330,51962.0,MRT,478,Mauritania
+331,4725.0,MWI,454,Malawi
+332,41700.0,NAM,516,Namibia
+333,57756.0,NER,562,Niger
+334,43080.0,NGA,566,Nigeria
+335,155.0,REU,638,Reunion
+336,1158.0,RWA,646,Rwanda
+337,120719.0,SDN,736,Sudan
+338,9596.0,SEN,686,Senegal
+339,3529.0,SLE,694,Sierra Leone
+340,30286.0,SOM,706,Somalia
+341,907.0,SWZ,748,Swaziland
+342,61453.0,TCD,148,Chad
+343,2704.0,TGO,768,Togo
+344,8719.0,TUN,788,Tunisia
+345,42595.0,TZA,834,United Rep. of Tanzania
+346,10084.0,UGA,800,Uganda
+347,65558.0,ZAF,710,South Africa
+348,35904.0,ZMB,894,Zambia
+349,19242.0,ZWE,716,Zimbabwe
+350,336.0,CPV,132,Cape Verde
+351,74.0,STP,678,Sao Tome and Principe
+352,44.0,SHN,654,Saint Helena
+353,139.0,MUS,480,Mauritius
+354,30145.0,MDG,450,Madagascar
+355,128.0,COM,174,Comoros
+356,38.0,MYT,1009,Mayotte
+357,26.0,SYC,690,Seychelles
