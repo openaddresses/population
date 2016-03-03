@@ -18,7 +18,8 @@ raster dataset, available at http://beta.sedac.ciesin.columbia.edu/data/set/gpw-
 
 Columns:
 
-* `iso_a3`: [ISO 3-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+* `iso_a2`, `iso_a3`: [ISO 2-letter](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+   and [3-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 * `lat`, `lon`: southwest corner of grid square.
 * `size`: size of grid square, `1.0` or `0.1`.
 * `year`: GPWv4 population estimate year.
@@ -26,11 +27,11 @@ Columns:
 
 Sample rows:
 
-|  iso_a3 | lat    | lon   | size | year | population   |
-|---------|--------|-------|------|------|--------------|
-|  FJI    | -180.0 | -20.0 | 1.0  | 2015 | 1.407        |
-|  USA    | -180.0 | 51.0  | 1.0  | 2015 | 0.0          |
-|  RUS    | -180.0 | 65.0  | 1.0  | 2015 | 78.736       |
+|  iso_a2 | iso_a3 | lat    | lon   | size | year | population   |
+|---------|--------|--------|-------|------|------|--------------|
+|  FJ     | FJI    | -180.0 | -20.0 | 1.0  | 2015 | 1.407        |
+|  US     | USA    | -180.0 | 51.0  | 1.0  | 2015 | 0.0          |
+|  RU     | RUS    | -180.0 | 65.0  | 1.0  | 2015 | 78.736       |
 
 1,583,241 total rows: 21,018 at size `1.0` and 1,562,223 at size `0.1`.
 
