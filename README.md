@@ -35,6 +35,28 @@ Sample rows:
 
 1,583,241 total rows: 21,018 at size `1.0` and 1,562,223 at size `0.1`.
 
+`gpwv4-2015-merc.csv.gz` is a variation on `gpwv4-2015.csv.gz`, with population
+calculated for [web mercator map tiles](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
+instead of lat/lon squares.
+
+Columns:
+
+* `iso_a2`, `iso_a3`: [ISO 2-letter](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+   and [3-letter country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+* `z`, `x`, `y`: coordinate location.
+* `year`: GPWv4 population estimate year.
+* `population`: Number of people in this grid square.
+
+Sample rows:
+
+|  iso_a2 | iso_a3 | z | x   | y   | year | population  | area       |
+|---------|--------|---|-----|-----|------|-------------|------------|
+|  FJ     | FJI    | 8 | 0   | 139 | 2015 | 2250.198    | 159.876    |
+|  US     | USA    | 8 | 16  | 54  | 2015 | 4713.011    | 2621.655   |
+|  RU     | RUS    | 8 | 169 | 20  | 2015 | 5.305       | 1613.484   |
+
+850,333 total rows: 17,702 at zoom `8` and 832,631 at zoom `11`.
+
 G-Econ Estimate
 ------
 

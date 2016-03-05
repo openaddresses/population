@@ -1,6 +1,11 @@
 # gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif comes from 477MB download at:
 # http://beta.sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals/data-download
 
+gpwv4-2015-merc.csv.gz: gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals-2015/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif \
+     gl_grumpv1_ntlbndid_grid_30/gluntlbnds gluntlbnds.csv
+	./reduce-gpwv4-mercator.py gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals-2015/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif \
+	                           gl_grumpv1_ntlbndid_grid_30/gluntlbnds gluntlbnds.csv $@
+
 gpwv4-2015.csv.gz: gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals-2015/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif \
      gl_grumpv1_ntlbndid_grid_30/gluntlbnds gluntlbnds.csv
 	./reduce-gpwv4.py gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals-2015/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif \
