@@ -6,14 +6,14 @@ More information at this post: http://mike.teczno.com/notes/openaddr/population-
 
 Includes gridded population data from two datasets,
 [Gridded Population of the World (GPW), v4](http://beta.sedac.ciesin.columbia.edu/data/collection/gpw-v4)
-(2015, UN-adjusted) in `gpwv4-2015.csv.gz` and
+(2015, UN-adjusted) in `data/gpwv4-2015.csv.gz` and
 [Geographically Based Economic Data 4.0](http://gecon.yale.edu/data-and-documentation-g-econ-project)
-(2005) in `gecon.csv.gz`.
+(2005) in `data/gecon.csv.gz`.
 
 GPWv4 Estimate
 -----
 
-Contents of `gpwv4-2015.csv.gz` derived from `gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif`
+Contents of `data/gpwv4-2015.csv.gz` derived from `gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals_2015.tif`
 raster dataset, available at http://beta.sedac.ciesin.columbia.edu/data/set/gpw-v4-population-count-adjusted-to-2015-unwpp-country-totals/data-download
 
 Columns:
@@ -35,7 +35,7 @@ Sample rows:
 
 1,583,241 total rows: 21,018 at size `1.0` and 1,562,223 at size `0.1`.
 
-`gpwv4-2015-merc.csv.gz` is a variation on `gpwv4-2015.csv.gz`, with population
+`data/gpwv4-2015-merc.csv.gz` is a variation on `data/gpwv4-2015.csv.gz`, with population
 calculated for [web mercator map tiles](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
 instead of lat/lon squares.
 
@@ -60,7 +60,7 @@ Sample rows:
 G-Econ Estimate
 ------
 
-Contents of `gecon.csv.gz` derived from `Gecon40_post_final.xls` spreadsheet,
+Contents of `data/gecon.csv.gz` derived from `Gecon40_post_final.xls` spreadsheet,
 available at http://gecon.yale.edu/data-and-documentation-g-econ-project
 
 Columns:
