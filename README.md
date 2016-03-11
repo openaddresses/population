@@ -10,6 +10,8 @@ Includes gridded population data from two datasets,
 [Geographically Based Economic Data 4.0](http://gecon.yale.edu/data-and-documentation-g-econ-project)
 (2005) in `data/gecon.csv.gz`.
 
+![dots preview](images/dots.png)
+
 GPWv4 Estimate
 -----
 
