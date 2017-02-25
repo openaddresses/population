@@ -57,7 +57,7 @@ Sample rows:
 |  US     | USA    | 8 | 16  | 54  | 2015 | 4713.011    |
 |  RU     | RUS    | 8 | 169 | 20  | 2015 | 5.305       |
 
-850,333 total rows: 17,702 at zoom `8` and 832,631 at zoom `11`.
+8,170,694 total rows: 17,702 at zoom `8`, 832,631 at zoom `11`, and 7,320,360 at zoom `13`.
 
 G-Econ Estimate
 ------

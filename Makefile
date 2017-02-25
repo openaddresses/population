@@ -24,3 +24,16 @@ data/gluntlbnds.csv: gl_grumpv1_ntlbndid_grid_30/gluntlbnds
 
 data/gecon.csv.gz: Gecon40_post_final.xls
 	./code/cut-gecon.py Gecon40_post_final.xls $@
+
+# https://www.gnu.org/software/make/manual/html_node/Pattern-Examples.html
+data/OA-summary-%.geojson: data/gpwv4-2015-1deg.geojson.gz data/OA-counts.geojson.gz
+	code/summarize-oa-country.py $* > $@
+
+data/OA-countries.geojson.gz: data/OA-counts.geojson.gz
+	gunzip --stdout data/OA-counts.geojson.gz | code/dissolve-coverage.py | gzip --stdout > $@
+
+data/gpwv4-2015-1deg.geojson.gz:
+	code/gpwv4-2015-1deg.py | gzip --stdout > $@
+
+data/OA-counts.geojson.gz:
+	code/join-coverage.py | gzip --stdout > $@

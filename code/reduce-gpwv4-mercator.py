@@ -22,6 +22,9 @@ def iterate_squares(ds, zoom):
     maxlon = xoff + ds.RasterXSize * xstride
     minlat = yoff + ds.RasterYSize * ystride
     
+    if zoom > 11:
+        maxlat = min(58, maxlat)
+    
     osm = Provider()
     ul = osm.locationCoordinate(Location(maxlat, minlon)).zoomTo(zoom)
     lr = osm.locationCoordinate(Location(minlat, maxlon)).zoomTo(zoom)
@@ -113,7 +116,7 @@ if __name__ == '__main__':
         output = csv.DictWriter(file, columns)
         output.writerow({c: c for c in columns})
         
-        for zoom in [8, 11]:
+        for zoom in [8, 11, 13]:
             for square in iterate_squares(ds_ids, zoom):
                 (coord, south, north), bbox = square[:3], square[3:]
                 
