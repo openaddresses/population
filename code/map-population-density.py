@@ -129,9 +129,9 @@ def main(iso_code):
         print('({0:.0f}, {1:.0f}) has {pop:.0f} people and {co:.0f} addresses in {km2:.0f} km2'.format(*poly.bounds, **locals()), file=sys.stderr)
         geojson_lo['features'].append(coverage_feature(poly, km2, co, pop, den))
 
-    dirpath = tempfile.mkdtemp(prefix='mapped-density-{}-'.format(iso_code.lower()), dir='.')
-    filename_hi = 'OA-density-{}.geojson'.format(iso_code.lower())
-    filename_lo = 'OA-density-{}-1deg.geojson'.format(iso_code.lower())
+    dirpath = tempfile.mkdtemp(prefix='mapped-density-{}-'.format(iso_code.upper()), dir='.')
+    filename_hi = 'OA-density-{}.geojson'.format(iso_code.upper())
+    filename_lo = 'OA-density-{}-1deg.geojson'.format(iso_code.upper())
 
     with open(join(dirpath, filename_lo), 'w') as file:
         json.dump(geojson_lo, file)
