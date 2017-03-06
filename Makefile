@@ -24,3 +24,7 @@ data/gluntlbnds.csv: gl_grumpv1_ntlbndid_grid_30/gluntlbnds
 
 data/gecon.csv.gz: Gecon40_post_final.xls
 	./code/cut-gecon.py Gecon40_post_final.xls $@
+
+# https://www.gnu.org/software/make/manual/html_node/Pattern-Examples.html
+data/OA-density-%.geojson: data/summaries-2017-03-06.tar.bz2
+	code/map-population-density.py $* | tail -n2 | xargs -n2 -J___ ln -v ___ data/

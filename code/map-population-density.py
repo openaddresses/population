@@ -114,28 +114,28 @@ def main(iso_code):
     summary_areas = get_summary_areas(SUMMARIES_PATH, iso_code)
     highres_coverage = list()
     
-    geojson1 = dict(type='FeatureCollection', features=list())
-    geojson2 = dict(type='FeatureCollection', features=list())
+    geojson_hi = dict(type='FeatureCollection', features=list())
+    geojson_lo = dict(type='FeatureCollection', features=list())
     
     for (poly, km2, co, pop, den) in get_highres_coverage(population_areas, summary_areas):
         print('({0:.1f}, {1:.1f}) has {pop:.0f} people and {co:.0f} addresses in {km2:.0f} km2'.format(*poly.bounds, **locals()), file=sys.stderr)
-        geojson1['features'].append(coverage_feature(poly, km2, co, pop, den))
+        geojson_hi['features'].append(coverage_feature(poly, km2, co, pop, den))
         highres_coverage.append((poly, km2, co, pop, den))
     
     for (poly, km2, co, pop, den) in get_lowres_coverage(highres_coverage):
         print('({0:.0f}, {1:.0f}) has {pop:.0f} people and {co:.0f} addresses in {km2:.0f} km2'.format(*poly.bounds, **locals()), file=sys.stderr)
-        geojson2['features'].append(coverage_feature(poly, km2, co, pop, den))
+        geojson_lo['features'].append(coverage_feature(poly, km2, co, pop, den))
 
     dirpath = tempfile.mkdtemp(prefix='mapped-density-{}-'.format(iso_code.lower()), dir='.')
-    filename1 = 'density-{}.geojson'.format(iso_code.lower())
-    filename2 = 'density-{}-1deg.geojson'.format(iso_code.lower())
+    filename_hi = 'OA-density-{}.geojson'.format(iso_code.lower())
+    filename_lo = 'OA-density-{}-1deg.geojson'.format(iso_code.lower())
 
-    with open(join(dirpath, filename1), 'w') as file:
-        json.dump(geojson1, file)
+    with open(join(dirpath, filename_lo), 'w') as file:
+        json.dump(geojson_lo, file)
         print(file.name)
 
-    with open(join(dirpath, filename2), 'w') as file:
-        json.dump(geojson2, file)
+    with open(join(dirpath, filename_hi), 'w') as file:
+        json.dump(geojson_hi, file)
         print(file.name)
 
 if __name__ == '__main__':
