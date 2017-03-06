@@ -53,13 +53,16 @@ def get_highres_coverage(population_areas, summary_areas):
     
         Join coverage bboxes from population and summary areas.
     '''
-    for ((population, poly_p, area), (count, poly_c)) in itertools.product(population_areas, summary_areas):
-        if not poly_p.intersects(poly_c) or poly_p.touches(poly_c):
-            continue # The area must actually overlap
+    poly_key = lambda poly: poly.bounds[:2]
+    summaries_dict = {poly_key(poly): (co, poly) for (co, poly) in summary_areas}
+    
+    for (population, poly_p, area) in population_areas:
+        poly_p_key = poly_key(poly_p)
+        if poly_p_key in summaries_dict:
+            count, poly_c = summaries_dict[poly_p_key]
+            density = count/population if population else None
         
-        density = count/population if population else None
-        
-        yield (poly_p, area, count, population, density)
+            yield (poly_p, area, count, population, density)
 
 def get_lowres_coverage(highres_coverage):
     ''' Generate a stream of (polygon, area, address count, population, density) tuples.
