@@ -61,8 +61,9 @@ def get_highres_coverage(population_areas, summary_areas):
         if poly_p_key in summaries_dict:
             count, poly_c = summaries_dict[poly_p_key]
             density = count/population if population else None
-        
             yield (poly_p, area, count, population, density)
+        else:
+            yield (poly_p, area, 0, population, 0)
 
 def get_lowres_coverage(highres_coverage):
     ''' Generate a stream of (polygon, area, address count, population, density) tuples.
