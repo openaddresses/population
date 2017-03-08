@@ -24,3 +24,6 @@ data/gluntlbnds.csv: gl_grumpv1_ntlbndid_grid_30/gluntlbnds
 
 data/gecon.csv.gz: Gecon40_post_final.xls
 	./code/cut-gecon.py Gecon40_post_final.xls $@
+
+/tmp/gpwv4-2015-cut.csv: data/gpwv4-2015.csv.gz
+	csvcut -c iso_a2,iso_a3,lon,lat,size,population,area data/gpwv4-2015.csv.gz > $@
