@@ -1,2 +1,4 @@
 xlrd==0.9.4
 ModestMaps==1.4.6
+requests==2.13.0
+psycopg2==2.7

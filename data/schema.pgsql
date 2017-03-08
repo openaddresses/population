@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS gpwv4_2015;
 DROP TABLE IF EXISTS gecon;
 DROP TABLE IF EXISTS boxes;
+DROP TABLE IF EXISTS areas;
 
 CREATE TABLE boxes
 (
@@ -9,6 +10,14 @@ CREATE TABLE boxes
     lat         FLOAT NOT NULL,
     size        FLOAT NOT NULL,
     geom        GEOMETRY(Polygon, 4326)
+);
+
+CREATE TABLE areas
+(
+    iso_a2      VARCHAR(2) PRIMARY KEY,
+    addr_count  INTEGER,
+    buffer_km   FLOAT,
+    geom        GEOMETRY(MultiPolygon, 4326)
 );
 
 CREATE TABLE gpwv4_2015
