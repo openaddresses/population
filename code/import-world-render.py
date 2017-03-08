@@ -67,6 +67,7 @@ with psycopg2.connect('postgres://localhost/oa_population') as conn:
     with conn.cursor() as db:
 
         ogr.UseExceptions()
+        iso_a2s = set()
         rendered_ds = ogr.Open(filename)
 
         db.execute('''
@@ -85,6 +86,7 @@ with psycopg2.connect('postgres://localhost/oa_population') as conn:
             if not geom:
                 continue
             
+            iso_a2s.add(iso_a2)
             print(geom.GetGeometryType(), iso_a2, feature.GetField('address count'), feature.GetField('source count'), feature.GetField('source paths'))
             
             if is_point(geom):
@@ -105,5 +107,57 @@ with psycopg2.connect('postgres://localhost/oa_population') as conn:
             SELECT iso_a2, SUM(count), 10, ST_Multi(ST_Union(geom))
             FROM rendered_world GROUP BY iso_a2;
             ''')
+        
+        for (index, iso_a2) in enumerate(sorted(iso_a2s)):
+            print('Counting up {} ({}/{})...'.format(iso_a2, index+1, len(iso_a2s)), file=sys.stderr)
+
+            db.execute('''
+                WITH
+                    --
+                    -- 1x1 boxes of Natural Earth coverage, with GPWv4 population and area.
+                    --
+                    ne_boxes AS (
+                    SELECT box.id, ne.name, gpw.area, gpw.population,
+                        ST_Intersection(ne.geom, box.geom) AS geom
+                    FROM ne_50m_admin_0_countries as ne, gpwv4_2015 as gpw, boxes as box
+                    WHERE ne.iso_a2 = %s
+                      AND ne.iso_a2 = gpw.iso_a2
+                      AND gpw.box_id = box.id
+                      AND box.size = 1.0
+                    ),
+                    --
+                    -- 1x1 boxes of OpenAddresses coverage, shapes only.
+                    --
+                    oa_boxes AS (
+                    SELECT box.id, ST_Intersection(oa.geom, box.geom) AS geom
+                    FROM areas as oa, gpwv4_2015 as gpw, boxes as box
+                    WHERE oa.iso_a2 = %s
+                      AND oa.iso_a2 = gpw.iso_a2
+                      AND gpw.box_id = box.id
+                      AND box.size = 1.0
+                    )
+
+                SELECT
+                    --
+                    -- Compare OA area coverage with NE area coverage for
+                    -- each 1x1 degree box to estimate area and population.
+                    --
+                    SUM(ne_boxes.area * ST_Area(ST_Intersection(oa_boxes.geom, ne_boxes.geom)) / ST_Area(ne_boxes.geom)) AS area_total,
+                    SUM(ne_boxes.population * ST_Area(ST_Intersection(oa_boxes.geom, ne_boxes.geom)) / ST_Area(ne_boxes.geom)) AS population_total,
+                    SUM(ne_boxes.area * ST_Area(ST_Intersection(oa_boxes.geom, ne_boxes.geom)) / ST_Area(ne_boxes.geom)) / SUM(ne_boxes.area) AS area_pct,
+                    SUM(ne_boxes.population * ST_Area(ST_Intersection(oa_boxes.geom, ne_boxes.geom)) / ST_Area(ne_boxes.geom)) / SUM(ne_boxes.population) AS population_pct,
+                    MIN(ne_boxes.name) AS name
+
+                FROM ne_boxes LEFT JOIN oa_boxes
+                ON ne_boxes.id = oa_boxes.id
+                WHERE ST_Area(ne_boxes.geom) > 0;
+                ''',
+                (iso_a2, iso_a2))
+            
+            (area_total, pop_total, area_pct, pop_pct, name) = db.fetchone()
+            
+            db.execute('''UPDATE areas SET name = %s, area_total = %s, area_pct = %s,
+                          pop_total = %s, pop_pct = %s WHERE iso_a2 = %s''',
+                       (name, area_total, area_pct, pop_total, pop_pct, iso_a2))
 
 os.remove(filename)

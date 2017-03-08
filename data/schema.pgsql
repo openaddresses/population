@@ -17,7 +17,13 @@ CREATE TABLE areas
     iso_a2      VARCHAR(2) PRIMARY KEY,
     addr_count  INTEGER,
     buffer_km   FLOAT,
-    geom        GEOMETRY(MultiPolygon, 4326)
+    geom        GEOMETRY(MultiPolygon, 4326),
+
+    name        TEXT,
+    area_total  INTEGER,
+    area_pct    FLOAT,
+    pop_total   INTEGER,
+    pop_pct     FLOAT
 );
 
 CREATE TABLE gpwv4_2015
