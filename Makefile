@@ -27,3 +27,6 @@ data/gecon.csv.gz: Gecon40_post_final.xls
 
 /tmp/gpwv4-2015-cut.csv: data/gpwv4-2015.csv.gz
 	csvcut -c iso_a2,iso_a3,lon,lat,size,population,area data/gpwv4-2015.csv.gz > $@
+
+/tmp/gecon-cut.csv: data/gecon.csv.gz
+	csvcut -c iso_a2,iso_a3,lon,lat,population,area data/gecon.csv.gz > $@

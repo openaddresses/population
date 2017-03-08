@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS gpwv4_2015;
+DROP TABLE IF EXISTS gecon;
 DROP TABLE IF EXISTS boxes;
 
 CREATE TABLE boxes
@@ -19,6 +20,15 @@ CREATE TABLE gpwv4_2015
     area        FLOAT
 );
 
+CREATE TABLE gecon
+(
+    iso_a2      VARCHAR(2),
+    iso_a3      VARCHAR(3),
+    box_id      INTEGER REFERENCES boxes(id),
+    population  FLOAT,
+    area        FLOAT
+);
+
 CREATE TEMPORARY TABLE gpwv4_2015_temp
 (
     iso_a2      VARCHAR(2),
@@ -30,10 +40,21 @@ CREATE TEMPORARY TABLE gpwv4_2015_temp
     area        FLOAT
 );
 
+CREATE TEMPORARY TABLE gecon_temp
+(
+    iso_a2      VARCHAR(2),
+    iso_a3      VARCHAR(3),
+    lon         FLOAT NOT NULL,
+    lat         FLOAT NOT NULL,
+    population  FLOAT,
+    area        FLOAT
+);
+
 COPY gpwv4_2015_temp FROM '/tmp/gpwv4-2015-cut.csv' DELIMITER ',' HEADER CSV;
+COPY gecon_temp FROM '/tmp/gecon-cut.csv' DELIMITER ',' HEADER CSV;
 
 --
--- Populate unique boxes
+-- Populate unique boxes from GPWv4 table
 --
 INSERT INTO boxes (lon, lat, size, geom)
     SELECT DISTINCT lon, lat, size,
@@ -50,3 +71,11 @@ INSERT INTO gpwv4_2015 (iso_a2, iso_a3, population, area, box_id)
     SELECT g.iso_a2, g.iso_a3, g.population, g.area, b.id
     FROM gpwv4_2015_temp AS g
     LEFT JOIN boxes AS b ON b.lat = g.lat AND b.lon = g.lon AND b.size = g.size;
+
+--
+-- Populate G-Econ areas
+--
+INSERT INTO gecon (iso_a2, iso_a3, population, area, box_id)
+    SELECT g.iso_a2, g.iso_a3, g.population, g.area, b.id
+    FROM gecon_temp AS g
+    LEFT JOIN boxes AS b ON b.lat = g.lat AND b.lon = g.lon AND b.size = 1.0;
