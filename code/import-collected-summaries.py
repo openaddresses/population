@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 from __future__ import print_function, division
-import os, sys, remote, requests, zipfile, csv, psycopg2
+import os, sys, remote, requests, zipfile, csv, psycopg2, collections, math
 from urlparse import urljoin
 
 def stream_summary_files(start_url):
@@ -27,72 +27,39 @@ def stream_summary_files(start_url):
             print(iso_a2, count, 'in', lon, lat)
             yield (iso_a2, count, lon, lat, 0.1)
 
-def summarize_country_coverage(db, iso_a2):
-    ''' ????
-    '''
-    print(iso_a2, '...')
-    db.execute('''
-        SELECT
-            --
-            min(count/population) AS min_cpp,
-            avg(count/population) AS avg_cpp,
-            max(count/population) AS max_cpp,
-            stddev_pop(count/population) AS std_cpp,
-            count(count/population) AS count_cpp
-
-        FROM (
-            SELECT box.id, SUM(oa.count) AS count, gpw.population
-            FROM world_summaries as oa, gpwv4_2015 as gpw, boxes as box
-            WHERE oa.iso_a2 = %s
-              AND oa.iso_a2 = gpw.iso_a2
-              AND gpw.box_id = box.id
-              AND box.lat = oa.lat
-              AND box.lon = oa.lon
-              AND box.size = oa.size
-              AND box.size = 0.1
-            GROUP BY box.id, gpw.population
-            ) AS oa
-        ''',
-        (iso_a2, ))
-    
-    print(db.fetchone())
-    return
-    
-    (area_total, pop_total, area_pct, pop_pct, name) = db.fetchone()
-    
-    db.execute('''UPDATE areas SET name = %s, area_total = %s, area_pct = %s,
-                  pop_total = %s, pop_pct = %s WHERE iso_a2 = %s''',
-               (name, area_total, area_pct, pop_total, pop_pct, iso_a2))
-
 start_url = 'https://results.openaddresses.io/index.json'
+summaries = collections.defaultdict(lambda: collections.defaultdict(int))
+
+for (iso_a2, count, lon, lat, size) in stream_summary_files(start_url):
+    summaries[iso_a2][(lon, lat, size)] += count
 
 with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
     with conn.cursor() as db:
-
-        iso_a2s = set()
-
-        db.execute('''
-            DROP TABLE IF EXISTS world_summaries;
-
-            CREATE TABLE world_summaries
-            (
-                iso_a2  VARCHAR(2),
-                count   INTEGER,
-                lon     FLOAT NOT NULL,
-                lat     FLOAT NOT NULL,
-                size    FLOAT NOT NULL
-            );
-            ''')
-
-        for (iso_a2, count, lon, lat, size) in stream_summary_files(start_url):
-            iso_a2s.add(iso_a2)
-            db.execute('''INSERT INTO world_summaries
-                          (iso_a2, count, lon, lat, size)
-                          VALUES (%s, %s, %s, %s, %s)''',
-                       (iso_a2, count, lon, lat, size))
-        
-        db.execute('''CREATE INDEX world_summaries_countries ON world_summaries (iso_a2)''')
-        
-        for (index, iso_a2) in [(0, 'IT')]: # enumerate(sorted(iso_a2s)):
-            print('Counting up {} ({}/{})...'.format(iso_a2, index+1, len(iso_a2s)), file=sys.stderr)
-            summarize_country_coverage(db, iso_a2)
+        for (index, iso_a2) in enumerate(sorted(summaries.keys())):
+            print('Counting up {} ({}/{})...'.format(iso_a2, index+1, len(summaries)), file=sys.stderr)
+            
+            counts = list()
+            
+            db.execute('''SELECT boxes.lon, boxes.lat, boxes.size, gpwv4_2015.population
+                          FROM boxes, gpwv4_2015
+                          WHERE gpwv4_2015.iso_a2 = %s
+                            AND boxes.id = gpwv4_2015.box_id
+                            AND gpwv4_2015.population >= 1''',
+                       (iso_a2, ))
+            
+            for (lon, lat, size, population) in db.fetchall():
+                if (lon, lat, size) not in summaries[iso_a2]:
+                    continue
+                
+                count = summaries[iso_a2][(lon, lat, size)]
+                counts.append(count/population)
+            
+            median = counts[len(counts) // 2]
+            mean = sum([c/len(counts) for c in counts])
+            deviations = [(c - mean) ** 2 for c in counts]
+            variance = sum([d/len(deviations) for d in deviations])
+            std_dev = math.sqrt(variance)
+            
+            db.execute('''UPDATE areas SET cpp_min = %s, cpp_max = %s, cpp_avg = %s,
+                          cpp_med = %s, cpp_stddev = %s WHERE iso_a2 = %s''',
+                       (min(counts), max(counts), mean, median, std_dev, iso_a2))

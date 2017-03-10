@@ -23,7 +23,13 @@ CREATE TABLE areas
     area_total  INTEGER,
     area_pct    FLOAT,
     pop_total   INTEGER,
-    pop_pct     FLOAT
+    pop_pct     FLOAT,
+    
+    cpp_min     FLOAT,
+    cpp_avg     FLOAT,
+    cpp_max     FLOAT,
+    cpp_med     FLOAT,
+    cpp_stddev  FLOAT
 );
 
 CREATE TABLE gpwv4_2015
