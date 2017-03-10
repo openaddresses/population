@@ -12,21 +12,25 @@ def stream_summary_files(start_url):
         collection_url = collection['url']
         print('Downloading', collection_url, '...', file=sys.stderr)
 
-        collection = zipfile.ZipFile(remote.RemoteFileObject(collection_url, block_size=256*1024))
-    
-        for name in sorted(collection.namelist()):
+        collection = zipfile.ZipFile(remote.RemoteFileObject(collection_url))
+        namelist = list()
+        
+        for name in collection.namelist():
             # CSV file paths look like "summary/{iso}/{etc}.csv"
             iso_a2 = os.path.relpath(name, 'summary').split(os.path.sep)[0].upper()
             _, ext = os.path.splitext(name)
         
             if (iso_a2 == '..') or (ext != '.csv'):
                 continue # Need a CSV file for the requested ISO code.
+            
+            namelist.append(name)
+    
+        for (index, name) in enumerate(sorted(namelist)):
+            print('Reading from {} ({}/{})...'.format(name, index+1, len(namelist)), file=sys.stderr)
 
             for row in csv.DictReader(collection.open(name)):
                 lon, lat = float(row['lon']), float(row['lat'])
                 count, geom_wkt = int(row['count']), row['area']
-
-                print(iso_a2, count, 'in', lon, lat)
                 yield (iso_a2, count, lon, lat, 0.1)
 
 start_url = 'https://results.openaddresses.io/index.json'
@@ -56,6 +60,9 @@ with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
                 count = summaries[iso_a2][(lon, lat, size)]
                 counts.append(count/population)
             
+            if not counts:
+                continue
+
             median = counts[len(counts) // 2]
             mean = sum([c/len(counts) for c in counts])
             deviations = [(c - mean) ** 2 for c in counts]
