@@ -2,3 +2,10 @@ xlrd==0.9.4
 ModestMaps==1.4.6
 requests==2.13.0
 psycopg2==2.7
+gunicorn==19.7.0
+itsdangerous==0.24
+Werkzeug==0.12
+MarkupSafe==1.0
+Jinja2==2.9.5
+click==6.7
+Flask==0.12
