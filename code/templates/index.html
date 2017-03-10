@@ -7,20 +7,20 @@
         <tr>
             <th>Country</th>
             <th>ISO</th>
-            <th>Population Covered</th>
             <th>Land Area Covered</th>
+            <th>Population in Land Area</th>
         </tr>
         {% for area in areas %}
             <tr>
                 <td>{{ area.iso_a2|nice_flag|safe }} {{ area.name }}</td>
                 <td>{{ area.iso_a2 }}</td>
                 <td>
-                    {{ area.pop_pct|nice_percentage }}
-                    <small>({{ area.pop_total|nice_integer }} people)</small>
-                </td>
-                <td>
                     {{ area.area_pct|nice_percentage }}
                     <small>({{ area.area_total|nice_integer }} km²)</small>
+                </td>
+                <td>
+                    {{ area.pop_pct|nice_percentage }}
+                    <small>({{ area.pop_total|nice_integer }} people)</small>
                 </td>
             </tr>
         {% endfor %}
