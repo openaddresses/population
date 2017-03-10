@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 from __future__ import print_function, division
-import flask, psycopg2, psycopg2.extras, os
+import flask, psycopg2, psycopg2.extras, os, re
 
 app = flask.Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -9,7 +9,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def get_index():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
-            db.execute('''SELECT iso_a2, name, addr_count, area_total, area_pct, pop_total, pop_pct
+            db.execute('''SELECT iso_a2, name, addr_count, area_total, area_pct,
+                                 pop_total, pop_pct, cpp_avg, cpp_stddev
                           FROM areas WHERE name IS NOT NULL ORDER BY name''')
             areas = db.fetchall()
             
@@ -42,8 +43,8 @@ def filter_nice_percentage(number):
     
     return '{:.1f}%'.format((number or 0) * 100)
 
-@app.template_filter('nice_integer')
-def filter_nice_integer(number):
+@app.template_filter('nice_big_number')
+def filter_nice_big_number(number):
     ''' Format a number like '99M', '9.9M', '99K', '9.9K', or '999'
     '''
     if number > 10000000:
@@ -62,6 +63,18 @@ def filter_nice_integer(number):
         return '{:.0f}'.format(number)
     
     return '0'
+
+@app.template_filter('nice_integer')
+def filter_nice_integer(number):
+    ''' Format a number like '999,999,999'
+    '''
+    string = str(int(number))
+    pattern = re.compile(r'^(\d+)(\d\d\d)\b')
+    
+    while pattern.match(string):
+        string = pattern.sub(r'\1,\2', string)
+    
+    return string
 
 def main():
     app.run(debug=True)
