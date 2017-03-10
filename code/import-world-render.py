@@ -159,7 +159,7 @@ with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
             print(iso_a2, feature.GetField('address count'), 'addresses from', feature.GetField('source paths'), file=sys.stderr)
         
         db.execute('''
-            TRUNCATE areas;
+            DELETE FROM areas;
             
             INSERT INTO areas (iso_a2, addr_count, buffer_km, geom)
             SELECT iso_a2, SUM(count), 10, ST_Multi(ST_Union(geom))
