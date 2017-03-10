@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Coverage{% endblock %}
+{% block info %}{% endblock %}
+{% block main %}
+<table>
+    {% for areas in [best_areas, okay_areas, empty_areas] %}
+        <tr>
+            <th>Country</th>
+            <th>Population Covered</th>
+            <th>Land Area Covered</th>
+        </tr>
+        {% for area in areas %}
+            <tr>
+                <td>{{ area.name }}</td>
+                <td>
+                    {{ area.pop_pct|nice_percentage }}
+                    <small>({{ area.pop_total|nice_integer }} people)</small>
+                </td>
+                <td>
+                    {{ area.area_pct|nice_percentage }}
+                    <small>({{ area.area_total|nice_integer }} km²)</small>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</tabl>
+{% endblock main %}
