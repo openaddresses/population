@@ -6,12 +6,14 @@
     {% for areas in [best_areas, okay_areas, empty_areas] %}
         <tr>
             <th>Country</th>
+            <th>ISO</th>
             <th>Population Covered</th>
             <th>Land Area Covered</th>
         </tr>
         {% for area in areas %}
             <tr>
-                <td>{{ area.name }}</td>
+                <td>{{ area.iso_a2|nice_flag|safe }} {{ area.name }}</td>
+                <td>{{ area.iso_a2 }}</td>
                 <td>
                     {{ area.pop_pct|nice_percentage }}
                     <small>({{ area.pop_total|nice_integer }} people)</small>

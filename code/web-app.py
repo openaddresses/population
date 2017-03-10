@@ -26,10 +26,20 @@ def get_index():
     return flask.render_template('index.html', best_areas=best_areas,
                                  okay_areas=okay_areas, empty_areas=empty_areas)
 
+@app.template_filter('nice_flag')
+def filter_nice_flag(iso_a2):
+    ''' Format a floating point number like '11%'
+    '''
+    chars = [0x1F1A5 + ord(letter) for letter in iso_a2]
+    return '&#{};&#{};'.format(*chars)
+
 @app.template_filter('nice_percentage')
 def filter_nice_percentage(number):
     ''' Format a floating point number like '11%'
     '''
+    if number >= 0.75:
+        return '{:.0f}%'.format(number * 100)
+    
     return '{:.1f}%'.format((number or 0) * 100)
 
 @app.template_filter('nice_integer')
