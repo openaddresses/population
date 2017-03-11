@@ -26,7 +26,7 @@ def stream_summary_files(start_url):
             namelist.append(name)
     
         for (index, name) in enumerate(sorted(namelist)):
-            print('Reading from {} ({}/{})...'.format(name, index+1, len(namelist)), file=sys.stderr)
+            print(u'Reading from {} ({}/{})...'.format(name, index+1, len(namelist)), file=sys.stderr)
             # CSV file paths look like "summary/{iso}/{etc}.csv"
             iso_a2 = os.path.relpath(name, 'summary').split(os.path.sep)[0].upper()
 
