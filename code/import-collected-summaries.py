@@ -27,6 +27,8 @@ def stream_summary_files(start_url):
     
         for (index, name) in enumerate(sorted(namelist)):
             print('Reading from {} ({}/{})...'.format(name, index+1, len(namelist)), file=sys.stderr)
+            # CSV file paths look like "summary/{iso}/{etc}.csv"
+            iso_a2 = os.path.relpath(name, 'summary').split(os.path.sep)[0].upper()
 
             for row in csv.DictReader(collection.open(name)):
                 lon, lat = float(row['lon']), float(row['lat'])
