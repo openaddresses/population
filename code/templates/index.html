@@ -58,5 +58,20 @@
             </tr>
         {% endfor %}
     {% endfor %}
-</tabl>
+</table>
+<h2>Gridded Population of the World (GPW), v4</h2>
+<p>
+    <a href="http://beta.sedac.ciesin.columbia.edu/data/collection/gpw-v4">The Gridded Population of the World (GPW) series</a>,
+    now in its fourth version (GPWv4), models the distribution of human
+    population (counts and densities) on a continuous global surface. Since the
+    release of the first version of this global population grid in 1995, the
+    essential inputs have been population census tables and corresponding
+    geographic boundaries. For GPWv4, population input data are collected at the
+    most detailed spatial resolution available from the results of the 2010
+    round of censuses, which occurred between 2005 and 2014.
+</p>
+<figure>
+    <img src="{{ url_for('static', filename='GPWv4.png') }}" width="100%">
+    <figcaption style="text-align: center; font-size: small">CC-BY 2016, Trustees of Columbia University in the City of New York</figcaption>
+</figure>
 {% endblock main %}
