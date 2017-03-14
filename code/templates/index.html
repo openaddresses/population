@@ -2,6 +2,25 @@
 {% block title %}Coverage{% endblock %}
 {% block info %}{% endblock %}
 {% block main %}
+<p>
+    OpenAddresses data is constantly improving through the efforts of our
+    volunteer community. The table on this page shows the latest coverage
+    details on a country-by-country basis.
+</p>
+<dl>
+    <dt>Land Area</dt>
+    <dd>
+        <a href="https://github.com/openaddresses/openaddresses/blob/master/CONTRIBUTING.md#coverage-object">Source coverage information</a>
+        is given as ISO 3166 codes, U.S. FIPS codes, or simple point and polygon geometries.
+    </dd>
+    <dt>Address Density</dt>
+    <dd>
+        We compare raw counts of address points in each country to
+        <a href="#gpwv4">Gridded Population of the World (GPWv4)</a> adjusted
+        population numbers at 0.1°&times;0.1° spatial resolution with standard
+        deviation provided.
+    </dd>
+</dl>
 <style lang="text/css">
 
     #coverage { border-collapse: collapse }
@@ -35,7 +54,7 @@
             <th>ISO</th>
             <th>Land Area Covered</th>
             <th>Population in Land Area</th>
-            <th>Addresses per 1,000 People</th>
+            <th>Address Density per 1,000 People</th>
         </tr>
         {% for area in areas %}
             <tr>
@@ -59,7 +78,7 @@
         {% endfor %}
     {% endfor %}
 </table>
-<h2>Gridded Population of the World (GPW), v4</h2>
+<h3 id="gpwv4">Gridded Population of the World (GPW), v4</h3>
 <p>
     <a href="http://beta.sedac.ciesin.columbia.edu/data/collection/gpw-v4">The Gridded Population of the World (GPW) series</a>,
     now in its fourth version (GPWv4), models the distribution of human
@@ -71,7 +90,7 @@
     round of censuses, which occurred between 2005 and 2014.
 </p>
 <figure>
+    <figcaption>CC-BY 2016, Trustees of Columbia University in the City of New York</figcaption>
     <img src="{{ url_for('static', filename='GPWv4.png') }}" width="100%">
-    <figcaption style="text-align: center; font-size: small">CC-BY 2016, Trustees of Columbia University in the City of New York</figcaption>
 </figure>
 {% endblock main %}
