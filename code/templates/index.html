@@ -2,7 +2,33 @@
 {% block title %}Coverage{% endblock %}
 {% block info %}{% endblock %}
 {% block main %}
-<table>
+<style lang="text/css">
+
+    #coverage { border-collapse: collapse }
+    
+    #coverage tr th,
+    #coverage tr td small
+    {
+        font-size: 65%;
+    }
+    
+    #coverage tr th, #coverage tr td
+    {
+        text-align: left;
+        padding: 3px 10px;
+        border: none;
+    }
+    
+    #coverage tr th
+    {
+        padding-top: 2em;
+    }
+    
+    #coverage tr:nth-child(2n+0)>* { background-color: #f8f8f8 }
+    #coverage tr:nth-child(2n+1)>* { background-color: #ffffff }
+
+</style>
+<table id="coverage">
     {% for areas in [best_areas, okay_areas, empty_areas] %}
         <tr>
             <th>Country</th>
@@ -14,7 +40,7 @@
         {% for area in areas %}
             <tr>
                 <td>{{ area.iso_a2|nice_flag|safe }} {{ area.name }}</td>
-                <td>{{ area.iso_a2 }}</td>
+                <td><code>{{ area.iso_a2 }}</code></td>
                 <td>
                     {{ area.area_pct|nice_percentage }}
                     <small>({{ area.area_total|nice_big_number }} km²)</small>
