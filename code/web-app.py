@@ -19,7 +19,7 @@ def get_index():
     for area in areas:
         if area['pop_pct'] > 0.98:
             best_areas.append(area)
-        elif area['pop_pct'] > 0.75:
+        elif area['pop_pct'] > 0.15:
             okay_areas.append(area)
         else:
             empty_areas.append(area)

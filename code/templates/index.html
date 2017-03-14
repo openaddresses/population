@@ -46,6 +46,23 @@
         padding-top: 2em;
     }
     
+    #coverage tr td.flag
+    {
+        text-align: right;
+        padding-right: 0;
+    }
+    
+    #coverage tr td.name
+    {
+        padding-left: .5em;
+    }
+    
+    #coverage tr td.iso code
+    {
+        border: none;
+        background-color: transparent;
+    }
+    
     #coverage tr:nth-child(2n+0)>* { background-color: #f8f8f8 }
     #coverage tr:nth-child(2n+1)>* { background-color: #ffffff }
 
@@ -53,16 +70,30 @@
 <table id="coverage">
     {% for areas in [best_areas, okay_areas, empty_areas] %}
         <tr>
-            <th>Country</th>
-            <th>ISO</th>
+            <th class="flag"></th>
+            <th class="name">Country</th>
+            <th class="iso">ISO</th>
+            <th>Coverage Group</th>
             <th>Land Area Covered</th>
             <th>Population in Land Area</th>
             <th>Address Density per 1,000 People</th>
         </tr>
         {% for area in areas %}
             <tr>
-                <td>{{ area.iso_a2|nice_flag|safe }} {{ area.name }}</td>
-                <td><code>{{ area.iso_a2 }}</code></td>
+                <td class="flag">{{ area.iso_a2|nice_flag|safe }}</td>
+                <td class="name">{{ area.name }}</td>
+                <td class="iso"><code>{{ area.iso_a2 }}</code></td>
+                <td>
+                    <small>
+                    {% if areas == best_areas %}
+                        Complete
+                    {% elif areas == okay_areas %}
+                        Substantial
+                    {% elif areas == empty_areas %}
+                        Minimal
+                    {% endif %}
+                    </small>
+                </td>
                 <td>
                     {{ area.area_pct|nice_percentage }}
                     <small>({{ area.area_total|nice_big_number }} km²)</small>
