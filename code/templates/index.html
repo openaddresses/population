@@ -29,7 +29,10 @@
     #coverage { border-collapse: collapse }
     
     #coverage tr th,
-    #coverage tr td small
+    #coverage tr td.group,
+    #coverage tr td.area-detail,
+    #coverage tr td.population-detail,
+    #coverage tr td.density-stddev
     {
         font-size: 65%;
     }
@@ -74,17 +77,16 @@
             <th class="name">Country</th>
             <th class="iso">ISO</th>
             <th>Coverage Group</th>
-            <th>Land Area Covered</th>
-            <th>Population Covered</th>
-            <th>Address Density per 1,000 People</th>
+            <th colspan="2">Land Area Covered</th>
+            <th colspan="2">Population Covered</th>
+            <th colspan="2">Address Density per 1,000 People</th>
         </tr>
         {% for area in areas %}
             <tr>
                 <td class="flag">{{ area.iso_a2|nice_flag|safe }}</td>
                 <td class="name">{{ area.name }}</td>
                 <td class="iso"><code>{{ area.iso_a2 }}</code></td>
-                <td>
-                    <small>
+                <td class="group">
                     {% if areas == best_areas %}
                         Complete
                     {% elif areas == okay_areas %}
@@ -92,20 +94,27 @@
                     {% elif areas == empty_areas %}
                         Minimal
                     {% endif %}
-                    </small>
                 </td>
                 <td>
                     {{ area.area_pct|nice_percentage }}
-                    <small>({{ area.area_total|nice_big_number }} km²)</small>
+                </td>
+                <td class="area-detail">
+                    {{ area.area_total|nice_big_number }} km²
                 </td>
                 <td>
                     {{ area.pop_pct|nice_percentage }}
-                    <small>({{ area.pop_total|nice_big_number }} people)</small>
+                </td>
+                <td class="population-detail">
+                    {{ area.pop_total|nice_big_number }} people
                 </td>
                 <td>
                     {% if area.cpp_avg %}
                     {{ (1000 * area.cpp_avg)|nice_integer }}
-                    <small>±{{ (1000 * area.cpp_stddev)|nice_integer }}</small>
+                    {% endif %}
+                </td>
+                <td class="density-stddev">
+                    {% if area.cpp_avg %}
+                    ±{{ (1000 * area.cpp_stddev)|nice_integer }}
                     {% endif %}
                 </td>
             </tr>
