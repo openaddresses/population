@@ -9,8 +9,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def get_index():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
-            db.execute('''SELECT iso_a2, name, addr_count, area_total, area_pct,
-                                 pop_total, pop_pct, cpp_avg, cpp_stddev
+            db.execute('''SELECT iso_a2, name, addr_count, area_total,
+                                 area_pct, pop_total, pop_pct
                           FROM areas WHERE name IS NOT NULL ORDER BY name''')
             areas = db.fetchall()
             
@@ -38,7 +38,7 @@ def filter_nice_flag(iso_a2):
 def filter_nice_percentage(number):
     ''' Format a floating point number like '11%'
     '''
-    if number >= 0.75:
+    if number >= 0.99:
         return '{:.0f}%'.format(number * 100)
     
     return '{:.1f}%'.format((number or 0) * 100)
@@ -47,6 +47,9 @@ def filter_nice_percentage(number):
 def filter_nice_big_number(number):
     ''' Format a number like '99M', '9.9M', '99K', '9.9K', or '999'
     '''
+    if number > 1000000:
+        return '{}K'.format(filter_nice_integer(number / 1000))
+    
     if number > 10000000:
         return '{:.0f}M'.format(number / 1000000)
     

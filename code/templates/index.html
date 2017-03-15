@@ -31,10 +31,15 @@
     #coverage tr th,
     #coverage tr td.group,
     #coverage tr td.area-detail,
-    #coverage tr td.population-detail,
-    #coverage tr td.density-stddev
+    #coverage tr td.population-detail
     {
         font-size: 65%;
+    }
+    
+    #coverage tr th.numeric,
+    #coverage tr td.numeric
+    {
+        text-align: right;
     }
     
     #coverage tr th, #coverage tr td
@@ -76,9 +81,9 @@
             <th colspan="2">Country</th>
             <th>ISO</th>
             <th>Coverage Group</th>
-            <th colspan="2">Land Area Covered</th>
-            <th colspan="2">Population Covered</th>
-            <th colspan="2">Address Density per 1,000 People</th>
+            <th colspan="2" class="numeric">Land Area Covered</th>
+            <th colspan="2" class="numeric">Population Covered</th>
+            <th class="numeric">Addresses per 1,000 People</th>
         </tr>
         {% for area in areas %}
             <tr>
@@ -94,26 +99,21 @@
                         Minimal
                     {% endif %}
                 </td>
-                <td>
+                <td class="numeric">
                     {{ area.area_pct|nice_percentage }}
                 </td>
-                <td class="area-detail">
+                <td class="numeric area-detail">
                     {{ area.area_total|nice_big_number }} km²
                 </td>
-                <td>
+                <td class="numeric">
                     {{ area.pop_pct|nice_percentage }}
                 </td>
-                <td class="population-detail">
+                <td class="numeric population-detail">
                     {{ area.pop_total|nice_big_number }} people
                 </td>
-                <td>
-                    {% if area.cpp_avg %}
-                    {{ (1000 * area.cpp_avg)|nice_integer }}
-                    {% endif %}
-                </td>
-                <td class="density-stddev">
-                    {% if area.cpp_avg %}
-                    ±{{ (1000 * area.cpp_stddev)|nice_integer }}
+                <td class="numeric">
+                    {% if area.pop_total > 0 %}
+                        {{ (1000 * area.addr_count / area.pop_total)|nice_integer }}
                     {% endif %}
                 </td>
             </tr>
