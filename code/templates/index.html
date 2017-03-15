@@ -5,23 +5,31 @@
 <p>
     OpenAddresses data is constantly improving through the efforts of our
     volunteer community. The table on this page shows the latest coverage
-    details on a country-by-country basis. Countries are divided into three
-    groups below: {{ best_areas|length }} countries with complete land area
-    coverage, {{ okay_areas|length }} countries with substantial coverage, and
-    {{ empty_areas|length }} countries with minimal coverage.
+    details on a country-by-country basis.
 </p>
 <dl>
+    <dt>Coverage Group</dt>
+    <dd>
+        Countries are divided into three groups below:
+        {{ best_areas|length }} countries with complete land area coverage,
+        {{ okay_areas|length }} countries with substantial coverage,
+        and {{ empty_areas|length }} countries with minimal coverage.
+    </dd>
     <dt>Land Area</dt>
     <dd>
         <a href="https://github.com/openaddresses/openaddresses/blob/master/CONTRIBUTING.md#coverage-object">Source coverage information</a>
         is given as ISO 3166 codes, U.S. FIPS codes, or simple point and polygon geometries.
     </dd>
-    <dt>Address Density</dt>
+    <dt>Population Covered</dt>
     <dd>
-        We compare raw counts of address points in each country to
-        <a href="#gpwv4">Gridded Population of the World (GPWv4)</a> adjusted
-        population numbers at 0.1°&times;0.1° spatial resolution with standard
-        deviation provided.
+        Number of people covered by given ISO 3166 codes, U.S. FIPS codes, or
+        simple point and polygon geometries, according to
+        <a href="#gpwv4">Gridded Population of the World (GPWv4)</a>.
+    </dd>
+    <dt>Addresses per 1,000 People</dt>
+    <dd>
+        We compare raw counts of address points in each country to GPWv4
+        adjusted population numbers.
     </dd>
 </dl>
 <style lang="text/css">
